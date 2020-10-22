@@ -3,8 +3,8 @@ package ccloud
 import (
 	"log"
 
-	ccloud "github.com/cgroschupp/go-client-confluent-cloud/confluentcloud"
 	"github.com/hashicorp/terraform/helper/schema"
+	ccloud "github.com/lifeci/go-client-confluent-cloud/confluentcloud"
 )
 
 func environmentResource() *schema.Resource {

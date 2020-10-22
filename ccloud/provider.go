@@ -3,9 +3,9 @@ package ccloud
 import (
 	"log"
 
-	confluentcloud "github.com/cgroschupp/go-client-confluent-cloud/confluentcloud"
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
+	confluentcloud "github.com/lifeci/go-client-confluent-cloud/confluentcloud"
 )
 
 func Provider() terraform.ResourceProvider {

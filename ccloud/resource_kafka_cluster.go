@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	ccloud "github.com/cgroschupp/go-client-confluent-cloud/confluentcloud"
 	"github.com/hashicorp/terraform/helper/schema"
+	ccloud "github.com/lifeci/go-client-confluent-cloud/confluentcloud"
 )
 
 func kafkaClusterResource() *schema.Resource {
@@ -78,6 +78,24 @@ func kafkaClusterResource() *schema.Resource {
 				Description: "Network egress limit(MBps)",
 			},
 			"deployment": {
+				Type:        schema.TypeMap,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "Deployment settings.  Currently only `sku` is supported.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"sku": {
+							Type:     schema.TypeString,
+							Required: true,
+						},
+						"cku": {
+							Type:     schema.TypeInt,
+							Required: true,
+						},
+					},
+				},
+			},
+			"network_access": {
 				Type:        schema.TypeMap,
 				Optional:    true,
 				ForceNew:    true,
@@ -176,7 +194,7 @@ func clusterRead(d *schema.ResourceData, meta interface{}) error {
 		err = d.Set("availability", cluster.Durability)
 	}
 	if err == nil {
-		err = d.Set("deployment", map[string]interface{}{ "sku": cluster.Deployment.Sku })
+		err = d.Set("deployment", map[string]interface{}{"sku": cluster.Deployment.Sku})
 	}
 	if err == nil {
 		err = d.Set("storage", cluster.Storage)
