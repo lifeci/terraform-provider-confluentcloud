@@ -88,10 +88,10 @@ func kafkaClusterResource() *schema.Resource {
 							Type:     schema.TypeString,
 							Required: true,
 						},
-						"cku": {
-							Type:     schema.TypeInt,
-							Required: true,
-						},
+						// "cku": {
+						// 	Type:     schema.TypeInt,
+						// 	Required: true,
+						// },
 					},
 				},
 			},
@@ -196,9 +196,9 @@ func clusterRead(d *schema.ResourceData, meta interface{}) error {
 	if err == nil {
 		err = d.Set("deployment", map[string]interface{}{"sku": cluster.Deployment.Sku})
 	}
-	if err == nil {
-		err = d.Set("deployment", map[string]interface{}{"cku": cluster.Deployment.Cku})
-	}
+	// if err == nil {
+	// 	err = d.Set("deployment", map[string]interface{}{"cku": cluster.Deployment.Cku})
+	// }
 	if err == nil {
 		err = d.Set("storage", cluster.Storage)
 	}
